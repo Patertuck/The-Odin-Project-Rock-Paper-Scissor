@@ -1,0 +1,27 @@
+button {
+  font-size: 48px;
+  padding: 30px;
+  display: inline-block;
+  border-radius: 30px;
+  max-width: 1500px;
+  font-weight: bold;
+}
+
+.buttons {
+  height: 100em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  justify-self: center;
+  align-self: center;
+}
+
+.standings,
+.announce {
+  display: flex;
+  font-size: 48px;
+  padding: 30px;
+  font-weight: bold;
+  justify-content: center;
+}

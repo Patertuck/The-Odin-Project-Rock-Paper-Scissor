@@ -39,21 +39,39 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   var wins_player = 0;
   var wins_computer = 0;
+  const announce = document.querySelector(".announce");
+  const standings = document.querySelector(".standings");
 
-  while (wins_player < 3 && 3 > wins_computer) {
-    var playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
-    var computer_selection = getComputerChoice();
-    var result = playRound(playerSelection, computer_selection);
+  buttons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      const playerSelection = e.target.id;
+      const computerSelection = getComputerChoice();
 
-    if (result.includes("Win")) {
-      wins_player++;
-    }
-    if (result.includes("Loose")) {
-      wins_computer++;
-    }
+      const result = playRound(playerSelection, computerSelection);
+      announce.innerHTML = result;
 
-    console.log(`Computer pick : ${computer_selection}\n${result}\nStanding: ${wins_player} to ${wins_computer}`);
-  }
+      if (result.includes("Win")) {
+        wins_player++;
+      }
+      if (result.includes("Loose")) {
+        wins_computer++;
+      }
+
+      if (wins_player === 3 || wins_computer === 3) {
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        if (wins_player === 3) {
+          announce.innerHTML += "<br>You won the game!";
+        } else {
+          announce.innerHTML += "<br>Computer won the game!";
+        }
+      }
+      standings.innerHTML = `You: ${wins_player} Computer: ${wins_computer}`;
+    });
+  });
 }
 
+const buttons = document.querySelectorAll("button");
 game();
